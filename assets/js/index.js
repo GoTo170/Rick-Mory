@@ -1,5 +1,14 @@
 import {getPersonajes} from'./peticiones/getPersonajes.js';
 
+const enviarDatos = (id, name, image, species, status, location) =>{
+    console.log(`El id es: ${id}`);
+    console.log(`El nombre es: ${name}`);
+    console.log(`La imagen es: ${image}`);
+    console.log(`La especie es: ${species}`);
+    console.log(`El status es: ${status}`);
+}
+
+
 const createCard =(results = []) => {
     
     let personajesRow = document.getElementById("personajesRow");
@@ -43,6 +52,9 @@ const createCard =(results = []) => {
         const btnVer = document.createElement("button");
         btnVer.classList.add("btn" , "btn-success");
         btnVer.textContent = `Ver detalles`;
+        btnVer.addEventListener("click", () =>{
+            enviarDatos(id, name, image, species, status, location);
+        })
 
         divBody.appendChild(title);
         divBody.appendChild(subTitle);
