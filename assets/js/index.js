@@ -6,6 +6,34 @@ const enviarDatos = (id, name, image, species, status, location) =>{
     console.log(`La imagen es: ${image}`);
     console.log(`La especie es: ${species}`);
     console.log(`El status es: ${status}`);
+
+    const rutaArchivoHTML = "../personaje.html";
+    
+    fetch(rutaArchivoHTML)
+        .then(response => response.text())
+        .then((html)=>{
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            const imagePage = doc.getElementById("imagePage");
+            imagePage.src = image;
+
+            const namePage = doc.getElementById("namePage");
+            namePage.textContent = `Nombre : ${name}`;
+
+            const speciesPage = doc.getElementById("speciesPage");
+            speciesPage.textContent = `Especie : ${species}`;
+
+            const statuspage = doc.getElementById("statusPage");
+            statuspage.textContent = `Estado : ${status}`;
+
+            const nuevoHTML = new XMLSerializer().serializeToString(doc);
+
+            document.body.innerHTML = nuevoHTML;
+        })
+        .catch((error)=>{
+            console.log(`El error es: ${error}`);
+        })
 }
 
 
